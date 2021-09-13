@@ -19,7 +19,7 @@ public class PukePai {
         System.out.println("--------------洗牌结束!---------------------------");
 //        pukePai.getNewPukeList();
         System.out.println("--------------创建玩家....---------------------------");
-        pukePai.createPlayer();
+        pukePai.createPlayers(2);
         pukePai.welcomePlayer();
         System.out.println("--------------开始发牌---------------------------");
         pukePai.sendPuke();
@@ -102,21 +102,26 @@ public class PukePai {
      * 创建玩家
      */
 
-    private void createPlayer() {
-        int n = 1;
+    private void createPlayers(int n) {
         Scanner scanner = new Scanner(System.in);
-        while (n < 3) {
-            System.out.println("请输入第" + n + "位玩家的ID和姓名");
+        for (int i=1;i<=n;i++) {
+            createPlayer(i, scanner);
+        }
+    }
+
+    private void createPlayer(int n, Scanner scanner) {
+        System.out.println("请输入第" + n + "位玩家的ID和姓名");
+        while (true) {
             System.out.println("输入ID:");
             String playerId = scanner.next();
             if(!isValidId(playerId)) {
-                System.out.println("请输入合法ID!");
+                System.out.println("请输入整数类型的ID!");
                 continue;
             }
             System.out.println("输入姓名:");
             String playerName = scanner.next();
             listPlayer.add(new Player(playerId, playerName));
-            n++;
+            break;
         }
     }
 
